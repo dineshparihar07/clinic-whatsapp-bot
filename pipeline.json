@@ -1,0 +1,125 @@
+{
+  "project": "WhatsApp Clinic Appointment Bot",
+  "stack": {
+    "chat_channel": "WhatsApp Business Cloud API",
+    "hosting": "Vercel",
+    "ai": "Google Gemini API",
+    "database": "TBD (Neon / Supabase / Vercel Postgres)",
+    "scheduler": "Vercel Cron Jobs",
+    "source_control": "Git (GitHub -> Vercel auto-deploy)"
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Setup & Planning",
+      "status": "in_progress",
+      "tasks": [
+        "Create GitHub repo",
+        "Create Vercel project + link repo",
+        "Set up WhatsApp Business account (Meta)",
+        "Obtain Gemini API key",
+        "Provision database",
+        "Add env vars to Vercel"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "WhatsApp Webhook Integration",
+      "status": "pending",
+      "tasks": [
+        "Build /api/webhook GET handler (verification handshake)",
+        "Build /api/webhook POST handler (receive messages)",
+        "Build send-message helper (text + templates + buttons)",
+        "Test round-trip message send/receive"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "AI Understanding Layer",
+      "status": "pending",
+      "tasks": [
+        "Design system prompt (clinic services, doctors, tone)",
+        "Build Gemini call wrapper (lib/gemini.ts)",
+        "Define intent schema: book | cancel | reschedule | faq | unknown",
+        "Extract entities: date, time, service, doctor",
+        "Handle ambiguous / low-confidence responses (ask clarifying question)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Slot & Booking Logic",
+      "status": "pending",
+      "tasks": [
+        "Design DB schema (patients, slots, appointments, waiting_list)",
+        "Build availability query",
+        "Build booking transaction (prevent double-booking)",
+        "Build conversation_state persistence between messages"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Confirmation System",
+      "status": "pending",
+      "tasks": [
+        "Design confirmation message/template",
+        "Send confirmation immediately after booking",
+        "Store confirmation status on appointment"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Reminder System",
+      "status": "pending",
+      "tasks": [
+        "Configure Vercel Cron (vercel.json)",
+        "Build /api/cron/reminders endpoint",
+        "Define reminder windows (e.g. 24h, 2h before)",
+        "Send reminder with Confirm/Cancel interactive buttons",
+        "Mark reminder_sent flag to avoid duplicates"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Confirm/Cancel Handling",
+      "status": "pending",
+      "tasks": [
+        "Parse button reply webhook events",
+        "Update appointment status (confirmed / cancelled)",
+        "Send acknowledgement message"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Waiting List Backfill",
+      "status": "pending",
+      "tasks": [
+        "Build waiting_list table + opt-in flow",
+        "On cancellation, query matching waiting-list patients",
+        "Send offer message to next patient(s) in queue",
+        "Handle race condition if multiple patients respond"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Testing & QA",
+      "status": "pending",
+      "tasks": [
+        "Test double-booking prevention",
+        "Test timezone handling",
+        "Test malformed/ambiguous patient messages",
+        "Test reminder + waiting-list end-to-end flow"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Deploy & Monitor",
+      "status": "pending",
+      "tasks": [
+        "Production deploy on Vercel",
+        "Set up error logging/alerts",
+        "Submit WhatsApp message templates for Meta approval",
+        "Monitor first real conversations, tune prompts"
+      ]
+    }
+  ]
+}
