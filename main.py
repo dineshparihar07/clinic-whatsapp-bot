@@ -10,6 +10,8 @@ load_dotenv()
 
 from api.webhook import router as webhook_router
 from api.cron import router as cron_router
+from api.admin import router as admin_router
+from api.metrics import router as metrics_router
 from lib.db import init_db
 
 # Configure logging
@@ -40,6 +42,8 @@ app.add_middleware(
 # Routes
 app.include_router(webhook_router, prefix="/api", tags=["webhook"])
 app.include_router(cron_router, prefix="/api", tags=["cron"])
+app.include_router(admin_router, prefix="/api", tags=["admin"])
+app.include_router(metrics_router, prefix="/api", tags=["monitoring"])
 
 @app.on_event("startup")
 async def startup_event():
