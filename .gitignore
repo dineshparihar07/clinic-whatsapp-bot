@@ -13,7 +13,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -22,6 +21,9 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Allow lib/ (project code, not venv)
+!lib/
 
 # Environment variables
 .env
